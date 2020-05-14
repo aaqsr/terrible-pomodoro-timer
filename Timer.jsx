@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Constants from 'expo-constants';
 
 export default class Timer extends React.Component {
@@ -7,7 +7,8 @@ export default class Timer extends React.Component {
         super(props);
 
         this.state = {
-            utime: 8,
+            utime: 68,
+            timerPlay: true
         }
     }
 
@@ -17,6 +18,8 @@ export default class Timer extends React.Component {
             <Text style={styles.timerContainer}>
             {timeConvert(this.state.utime)}
             </Text>
+            <Button onPress={this.playHandler} title="Play"/>
+            <Button onPress={this.pauseHandler} title="Pause"/>
             </View>
         )
     }
@@ -24,10 +27,35 @@ export default class Timer extends React.Component {
     timerTick = () => {
         this.setState( (prevState) => {
             return ({
-                utime: prevState.utime - 1
+                utime: prevState.utime - 1,
+                timerPlay: prevState.timerPlay,
             });
         });
         console.log("timer tick!");
+    }
+
+       playHandler = () => {
+        if (this.state.timerPlay === false) {
+            this.setState( (prevState) => {
+                return ({
+                    utime: prevState.utime,
+                    timerPlay: true,
+                });
+            });
+            this.intervalId = setInterval(this.timerTick,1000);
+        }
+    }
+
+ pauseHandler = () => {
+        if (this.state.timerPlay) {
+        this.setState( (prevState) => {
+            return ({
+                utime: prevState.utime,
+                timerPlay: false,
+            });
+        });
+        clearInterval(this.intervalId);
+        }
     }
 
     componentDidMount() {
@@ -61,5 +89,5 @@ const styles = StyleSheet.create({
         fontSize: 60,
         paddingTop: Constants.statusBarHeight * 2.5,
         alignSelf: "center",
-    }
-})
+    },
+    })
