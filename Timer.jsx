@@ -42,6 +42,9 @@ export default class Timer extends React.Component {
             <View style={styles.buttonSpacing}>
             <Button onPress={this.pauseHandler} title="Pause" />
             </View>
+            <View style={styles.buttonSpacing}>
+            <Button onPress={this.resetHandler} title="Reset" />
+            </View>
             </View>
             </View>
         )
@@ -82,6 +85,14 @@ export default class Timer extends React.Component {
             });
             clearInterval(this.intervalId);
         }
+    }
+
+    resetHandler = () => {
+        this.setState({
+            utime: workTime,
+            timerPlay: true,
+            breakModeNext: true,
+        });
     }
 
     componentDidMount() {
