@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Vibration, StyleSheet, Text, View, Button } from 'react-native';
 import Constants from 'expo-constants';
+
 
 
 const Mode = (props) => {
@@ -115,6 +116,7 @@ export default class Timer extends React.Component {
     shouldComponentUpdate() {
         if (this.state.utime <= 0) {
             this.modeSwitcher()
+            Vibration.vibrate([500, 500, 500])
         }
         return true;
     }
