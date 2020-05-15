@@ -7,3 +7,5 @@ Simple React Native app that implements a timer from scratch that runs on "work"
 * Break mode lasts 5 min.
 
 in accordance to the [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)
+
+(This app made with Expo. Install Expo, download the source, and do `expo start` to open)
