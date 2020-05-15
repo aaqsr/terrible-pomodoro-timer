@@ -2,6 +2,15 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Constants from 'expo-constants';
 
+
+const Mode = (props) => {
+        if (props.breakModeNext) {
+            return ("Work!")
+        } else {
+            return ("Break!")
+        }
+    }
+
 export default class Timer extends React.Component {
     constructor(props) {
         super(props);
@@ -18,11 +27,14 @@ export default class Timer extends React.Component {
         return (
             <View>
             <View style={styles.timerContainer}>
-            <Text style={styles.timerTextContainer}>
+            <Text style={[styles.timerTextContainerSmall, styles.center]}>
+            <Mode breakModeNext={this.state.breakModeNext}/>
+            </Text>
+            <Text style={[styles.timerTextContainerLarge, styles.center]}>
             {timeConvert(this.state.utime)}
             </Text>
             </View>
-            <View style={styles.buttonContainer}>
+            <View style={[styles.buttonContainer, styles.center]}>
             <View style={styles.buttonSpacing}>
             <Button onPress={this.playHandler} title="Play" />
             </View>
@@ -100,7 +112,6 @@ export default class Timer extends React.Component {
         ));
     }
 
-
     shouldComponentUpdate() {
         if (this.state.utime <= 0) {
             this.modeSwitcher()
@@ -121,21 +132,24 @@ function timeConvert(num) {
 
 const styles = StyleSheet.create({
     timerContainer: {
-        borderColor: "blue",
+        borderColor: "lightblue",
         borderStyle: "solid",
         borderRadius: 5,
         borderWidth: 5,
         marginTop: Constants.statusBarHeight * 2.5,
     },
-    timerTextContainer: {
+    timerTextContainerSmall: {
+        fontSize: 16,
+    },
+    timerTextContainerLarge: {
         fontSize: 60,
+    },
+    center: {
         alignSelf: "center",
-
     },
     buttonContainer: {
         // flexDirection: "row",
         width: "90%",
-        alignSelf: "center",
         fontSize: 30,
         margin: 10,
     },
