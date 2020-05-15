@@ -2,13 +2,14 @@ import React from 'react';
 import { Vibration, StyleSheet, Text, View, Button } from 'react-native';
 import Constants from 'expo-constants';
 
-
+const workTime = 20 * 60;
+const breakTime = 5 * 60;
 
 const Mode = (props) => {
         if (props.breakModeNext) {
-            return ("Work!")
+            return ("Work!");
         } else {
-            return ("Break!")
+            return ("Break!");
         }
     }
 
@@ -17,8 +18,7 @@ export default class Timer extends React.Component {
         super(props);
 
         this.state = {
-            utime: 6,
-            // utime: 20 * 60,
+            utime: workTime,
             timerPlay: true,
             breakModeNext: true,
         }
@@ -96,10 +96,10 @@ export default class Timer extends React.Component {
         let time = null;
         let nextModeIsBreak = null;
         if (this.state.breakModeNext) {
-            time = 5
+            time = breakTime;
             nextModeIsBreak = false;
         } else {
-            time = 8
+            time = workTime;
             nextModeIsBreak = true;
         }
         // if (this.state.breakModeNext) { time = 5 * 60 } else { time = 20 * 60 }
